@@ -85,7 +85,8 @@
                                                         <div> <img src='<%= product.ProductDp %>'></div>
                                                         <div>
                                                             <h4 class="description">
-                                                                <%= product.Title %><%= product.liked %>
+                                                                <%= product.Title %>
+                                                                <%= product.liked %>
                                                             </h4>
                                                         </div>
 
@@ -209,8 +210,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 <script>
-
-$("form").on('submit', function (e) {
+    $("form").on('submit', function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -289,24 +289,24 @@ $("form").on('submit', function (e) {
     }
 
 
-/*
+    /*
 
-    $(document).ready(function () {
-        $('#searchbarslot').append(
-            '<form method="GET" id="searchform"><input name="text"  type="text" id="search"  class="autocomplete black-text" placeholder="Search.." style="z-index:9999999999999;"></form>'
-        ).css('display', 'block');
-    });
+        $(document).ready(function () {
+            $('#searchbarslot').append(
+                '<form method="GET" id="searchform"><input name="text"  type="text" id="search"  class="autocomplete black-text" placeholder="Search.." style="z-index:9999999999999;"></form>'
+            ).css('display', 'block');
+        });
 
 
-    $('#searchbarslot').on('submit', '#searchform', function (e) {
-        e.preventDefault();
-        let query = $('#search', this).val();
-        while (query.indexOf("  ") !== -1) {
-            query = query.replace(/  /, ' ');
-        }
-        window.location.pathname = encodeURI('/search/' + query.split(' ').join('+'));
-    });
-*/
+        $('#searchbarslot').on('submit', '#searchform', function (e) {
+            e.preventDefault();
+            let query = $('#search', this).val();
+            while (query.indexOf("  ") !== -1) {
+                query = query.replace(/  /, ' ');
+            }
+            window.location.pathname = encodeURI('/search/' + query.split(' ').join('+'));
+        });
+    */
 
     $(document).ready(function () {
         $('input.autocomplete').autocomplete({

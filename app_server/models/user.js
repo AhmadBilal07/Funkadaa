@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     Name: String,
-    Followers:[String],
+    Followers: [String],
     Followings: [String],
     Userdp: String,
     Email: String,
@@ -12,7 +12,7 @@ var UserSchema = new mongoose.Schema({
         type: Number,
         "default": 0
     },
-    SavedProducts:[String]
+    SavedProducts: [String]
 });
 
-module.exports = mongoose.model('User',UserSchema);
+module.exports = mongoose.model('User', UserSchema);

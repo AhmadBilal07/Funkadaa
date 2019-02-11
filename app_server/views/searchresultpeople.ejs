@@ -68,10 +68,10 @@
 
             <div>
                 <div class="twPc-button">
-                   
-                        <button class="btn circle waves-effect waves-light white red-text" id= "<%= var1._id %>" onclick="follow(id)" >Follow
-                        </button>
-                   
+
+                    <button class="btn circle waves-effect waves-light white red-text" id="<%= var1._id %>" onclick="follow(id)">Follow
+                    </button>
+
                 </div>
 
                 <a title="Mert S. Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
@@ -145,18 +145,17 @@
 
 
 
-function follow(item){
+    function follow(item) {
 
- $.ajax({  
-                url: '/follow/'+item,  
-                type: 'PUT',
-                success: function() 
-                {
-                    alert("followed");
-                }  
-                  
- });
-}
+        $.ajax({
+            url: '/follow/' + item,
+            type: 'PUT',
+            success: function () {
+                alert("followed");
+            }
+
+        });
+    }
 
     $('select').material_select();
     var fixmeTop = $('.fixme').offset().top;
@@ -205,11 +204,10 @@ function follow(item){
         while (query.indexOf("  ") !== -1) {
             query = query.replace(/  /g, ' ');
         }
-        
-        if(window.location.pathname.indexOf('/search/people') === 0) {
+
+        if (window.location.pathname.indexOf('/search/people') === 0) {
             window.location.pathname = encodeURI('/search/people/' + query.split(' ').join('+'));
-        }
-        else {
+        } else {
             window.location.pathname = encodeURI('/search/' + query.split(' ').join('+'));
         }
     });

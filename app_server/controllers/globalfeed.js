@@ -1,41 +1,39 @@
 var mongoose = require('mongoose');
-var fullUrl=require('../absolute-url');
+var fullUrl = require('../absolute-url');
 var User = require('../models/user');
 let product = require('../models/product');
 
 
 
 module.exports.load = function (req, res) {
-  
+
   User.findById(req.session.uid, function (err, User) {
-  
-  if(err)
-    throw err;
-    
-  User.Userdp = fullUrl(req, User.Userdp);
-  console.log(User);
+
+    if (err)
+      throw err;
+
+    User.Userdp = fullUrl(req, User.Userdp);
+    console.log(User);
 
 
-  product.find({}, function (err, products) {
-  
-    // Makes relative URLs, absolute URLs
-    products.map(function (product) {
-      product.ProductDp = fullUrl(req, product.ProductDp);
-      if(product.LikedBy.indexOf(req.session.uid))
-        {      
-          product["liked"] = 1;        
-        }
-      else
-      product["liked"] = 1;        
+    product.find({}, function (err, products) {
 
-      return product;
-    });
-    console.log("------------------");
+      // Makes relative URLs, absolute URLs
+      products.map(function (product) {
+        product.ProductDp = fullUrl(req, product.ProductDp);
+        if (product.LikedBy.indexOf(req.session.uid)) {
+          product["liked"] = 1;
+        } else
+          product["liked"] = 1;
 
-    console.log(products);
-    console.log("------------------");
-    
-    
+        return product;
+      });
+      console.log("------------------");
+
+      console.log(products);
+      console.log("------------------");
+
+
 
 
 
@@ -43,12 +41,16 @@ module.exports.load = function (req, res) {
         products,
         User
       });
-    }).where({UserId: {$ne : req.session.uid}});
-  
-  
+    }).where({
+      UserId: {
+        $ne: req.session.uid
+      }
+    });
 
 
-})
+
+
+  })
 
 
 
@@ -56,31 +58,37 @@ module.exports.load = function (req, res) {
 module.exports.Sketches = function (req, res) {
   console.log("sketches");
   User.findById(req.session.uid, function (err, User) {
-  
+
 
     User.Userdp = fullUrl(req, User.Userdp);
     console.log(User);
-  
-  
-    product.find({Category: 'Sketch'}, function (err, products) {
-    
+
+
+    product.find({
+      Category: 'Sketch'
+    }, function (err, products) {
+
       // Makes relative URLs, absolute URLs
       products.map(function (product) {
         product.ProductDp = fullUrl(req, product.ProductDp);
-        product.UserDp=fullUrl(req, product.UserDp);
-        product.Comments.map((c)=>{
-          c.UserDp=fullUrl(req, c.UserDp);
+        product.UserDp = fullUrl(req, product.UserDp);
+        product.Comments.map((c) => {
+          c.UserDp = fullUrl(req, c.UserDp);
           return c;
         })
         return product;
       });
-    
-        res.render('globalfeed', {
-          products,
-          User
-        });
-      }).where({UserId: {$ne : req.session.uid}});
+
+      res.render('globalfeed', {
+        products,
+        User
+      });
+    }).where({
+      UserId: {
+        $ne: req.session.uid
+      }
     });
+  });
 }
 
 
@@ -90,33 +98,39 @@ module.exports.Sketches = function (req, res) {
 module.exports.Paintings = function (req, res) {
   console.log("Paintings");
   User.findById(req.session.uid, function (err, User) {
-  
+
 
     User.Userdp = fullUrl(req, User.Userdp);
     console.log(User);
-  
-  
-    product.find({Category: 'Painting'}, function (err, products) {
-    
+
+
+    product.find({
+      Category: 'Painting'
+    }, function (err, products) {
+
       // Makes relative URLs, absolute URLs
       products.map(function (product) {
         product.ProductDp = fullUrl(req, product.ProductDp);
-        product.UserDp=fullUrl(req, product.UserDp);
+        product.UserDp = fullUrl(req, product.UserDp);
 
-        product.Comments.map((c)=>{
-          c.UserDp=fullUrl(req, c.UserDp);
+        product.Comments.map((c) => {
+          c.UserDp = fullUrl(req, c.UserDp);
           return c;
         })
 
         return product;
       });
-    
-        res.render('globalfeed', {
-          products,
-          User
-        });
-      }).where({UserId: {$ne : req.session.uid}});
+
+      res.render('globalfeed', {
+        products,
+        User
+      });
+    }).where({
+      UserId: {
+        $ne: req.session.uid
+      }
     });
+  });
 }
 
 
@@ -125,31 +139,37 @@ module.exports.Paintings = function (req, res) {
 module.exports.Handicraft = function (req, res) {
   console.log("Handicraft");
   User.findById(req.session.uid, function (err, User) {
-  
+
 
     User.Userdp = fullUrl(req, User.Userdp);
     console.log(User);
-  
-  
-    product.find({Category: 'Handicraft'}, function (err, products) {
-    
+
+
+    product.find({
+      Category: 'Handicraft'
+    }, function (err, products) {
+
       // Makes relative URLs, absolute URLs
       products.map(function (product) {
         product.ProductDp = fullUrl(req, product.ProductDp);
-        product.UserDp=fullUrl(req, product.UserDp);
-        product.Comments.map((c)=>{
-          c.UserDp=fullUrl(req, c.UserDp);
+        product.UserDp = fullUrl(req, product.UserDp);
+        product.Comments.map((c) => {
+          c.UserDp = fullUrl(req, c.UserDp);
           return c;
         })
         return product;
       });
-    
-        res.render('globalfeed', {
-          products,
-          User
-        });
-      }).where({UserId: {$ne : req.session.uid}});
+
+      res.render('globalfeed', {
+        products,
+        User
+      });
+    }).where({
+      UserId: {
+        $ne: req.session.uid
+      }
     });
+  });
 }
 
 
@@ -157,32 +177,36 @@ module.exports.Handicraft = function (req, res) {
 module.exports.Calligraphy = function (req, res) {
   console.log("Calligraphy");
   User.findById(req.session.uid, function (err, User) {
-  
+
 
     User.Userdp = fullUrl(req, User.Userdp);
     console.log(User);
-  
-  
-    product.find({Category: 'Calligraphy'}, function (err, products) {
-    
+
+
+    product.find({
+      Category: 'Calligraphy'
+    }, function (err, products) {
+
       // Makes relative URLs, absolute URLs
       products.map(function (product) {
         product.ProductDp = fullUrl(req, product.ProductDp);
-        product.UserDp=fullUrl(req, product.UserDp);
-        product.Comments.map((c)=>{
-          c.UserDp=fullUrl(req, c.UserDp);
+        product.UserDp = fullUrl(req, product.UserDp);
+        product.Comments.map((c) => {
+          c.UserDp = fullUrl(req, c.UserDp);
           return c;
         })
 
         return product;
       });
-    
-        res.render('globalfeed', {
-          products,
-          User
-        });
-      }).where({UserId: {$ne : req.session.uid}});
+
+      res.render('globalfeed', {
+        products,
+        User
+      });
+    }).where({
+      UserId: {
+        $ne: req.session.uid
+      }
     });
+  });
 }
-
-

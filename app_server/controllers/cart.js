@@ -7,10 +7,12 @@ module.exports.delete = function (req, res) {
 
 
 
-  Cart.findOne({Purchaser: req.session.uid}, function (err, result) {
+  Cart.findOne({
+    Purchaser: req.session.uid
+  }, function (err, result) {
     result.Products.id(req.params.id).remove();
-    result.save();            
-});
+    result.save();
+  });
 
 
 

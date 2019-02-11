@@ -7,7 +7,7 @@ var fullUrl = require('../absolute-url');
 module.exports.load = function (req, res) {
 
   User.findById(req.session.uid, function (err, user) {
-    if(err)
+    if (err)
       throw err;
     console.log(req.session.uid);
     user.Userdp = fullUrl(req, user.Userdp);
@@ -19,8 +19,8 @@ module.exports.load = function (req, res) {
       // Makes relative URLs, absolute URLs
       products.map(function (product) {
         product.ProductDp = fullUrl(req, product.ProductDp);
-        product.Comments.map((c)=>{
-          c.UserDp=fullUrl(req, c.UserDp);
+        product.Comments.map((c) => {
+          c.UserDp = fullUrl(req, c.UserDp);
           return c;
         })
         return product;
@@ -41,25 +41,26 @@ module.exports.saved = function (req, res) {
 
   User.findById(req.session.uid, function (err, user) {
 
-    if(err)
-    throw(err);
-    else{
-    user.Userdp = fullUrl(req, user.Userdp);
+    if (err)
+      throw (err);
+    else {
+      user.Userdp = fullUrl(req, user.Userdp);
 
-    Product.find({
-      SavedBy: req.session.uid
-    }, function (err, products) {
-      // Makes relative URLs, absolute URLs
-      products.map(function (product) {
-        product.ProductDp = fullUrl(req, product.ProductDp);
-        product.UserDp=fullUrl(req, product.UserDp);
-        return product;
-      });
-      res.render('profile', {
-        User: user,
-        Myproducts: products
+      Product.find({
+        SavedBy: req.session.uid
+      }, function (err, products) {
+        // Makes relative URLs, absolute URLs
+        products.map(function (product) {
+          product.ProductDp = fullUrl(req, product.ProductDp);
+          product.UserDp = fullUrl(req, product.UserDp);
+          return product;
+        });
+        res.render('profile', {
+          User: user,
+          Myproducts: products
+        })
       })
-    })}
+    }
   });
 }
 
@@ -148,26 +149,30 @@ module.exports.followers = function (req, res) {
   User.findById(req.session.uid, function (err, user) {
     user.Userdp = fullUrl(req, user.Userdp);
 
-    
-    User.find({_id: { $in: user.Followers }},function(err,result){
+
+    User.find({
+      _id: {
+        $in: user.Followers
+      }
+    }, function (err, result) {
       console.log(result);
-      
-    //Makes relative URLs, absolute URLs
-   result.map(function (item ){
-     item.Userdp = fullUrl(req, item.Userdp);
-return item;
-    });
+
+      //Makes relative URLs, absolute URLs
+      result.map(function (item) {
+        item.Userdp = fullUrl(req, item.Userdp);
+        return item;
+      });
 
 
 
       res.render('follower', {
         User: user,
-        Person:result
+        Person: result
 
 
-    })
-  });
-})
+      })
+    });
+  })
 }
 module.exports.followings = function (req, res) {
 
@@ -177,24 +182,28 @@ module.exports.followings = function (req, res) {
   User.findById(req.session.uid, function (err, user) {
     user.Userdp = fullUrl(req, user.Userdp);
 
-    
-    User.find({_id: { $in: user.Followings }},function(err,result){
+
+    User.find({
+      _id: {
+        $in: user.Followings
+      }
+    }, function (err, result) {
       console.log(result);
-      
-    //Makes relative URLs, absolute URLs
-   result.map(function (item ){
-     item.Userdp = fullUrl(req, item.Userdp);
-return item;
-    });
+
+      //Makes relative URLs, absolute URLs
+      result.map(function (item) {
+        item.Userdp = fullUrl(req, item.Userdp);
+        return item;
+      });
 
 
 
       res.render('follower', {
         User: user,
-        Person:result
+        Person: result
 
 
-    })
-  });
-})
+      })
+    });
+  })
 }

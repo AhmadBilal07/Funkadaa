@@ -45,11 +45,12 @@ module.exports.comment = function (req, res) {
     }
 
 
-res.send({Comment:comment.CommentText,
-  UserName: user.Name,
-  UserDp: user.Userdp,
-  Productid:req.body.productid
-});
+    res.send({
+      Comment: comment.CommentText,
+      UserName: user.Name,
+      UserDp: user.Userdp,
+      Productid: req.body.productid
+    });
 
 
   })
@@ -76,7 +77,7 @@ module.exports.like = function (req, res) {
     })
 
 
-    res.send();
+  res.send();
 
 }
 
@@ -108,8 +109,8 @@ module.exports.save = function (req, res) {
       }
     })
 
-    res.send();
-    
+  res.send();
+
 }
 
 
@@ -127,7 +128,7 @@ module.exports.cart = function (req, res) {
         ProductDp: item.ProductDp,
         Price: item.Price,
         Quantity: item.Quantity,
-        ProductId:item._id
+        ProductId: item._id
       }
 
       Cart.findOneAndUpdate({

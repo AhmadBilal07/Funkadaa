@@ -1,69 +1,74 @@
-
 <html lang="en">
 
 <head>
 
-<% include partials/head %>
+    <% include partials/head %>
 
 </head>
+
 <body>
-  <% include partials/header %>
+    <% include partials/header %>
 
 
-<% Posts.forEach( post => { %>
-<div class="list">
-    <ul>
-        <li><a href="https://goo.gl/TChSJ4" target='_blank'><img src=<%=post.UserDp %>> class="avatar avatar-50"><%=post.name %></a></li>
-        <li><a href='#'>Log in</a></li>
-        <li><a href='#'>Sign up</a></li>
-        <li><a href='#'>Report this user</a></li>
-        <li class='collapse'><a href='#'>Collapse the bar</a></li>
+    <% Posts.forEach( post => { %>
+    <div class="list">
+        <ul>
+            <li><a href="https://goo.gl/TChSJ4" target='_blank'><img src=<%=post.UserDp %>> class="avatar avatar-50">
+                    <%=post.name %></a></li>
+            <li><a href='#'>Log in</a></li>
+            <li><a href='#'>Sign up</a></li>
+            <li><a href='#'>Report this user</a></li>
+            <li class='collapse'><a href='#'>Collapse the bar</a></li>
         </ul>
     </div>
-<section id="sec2">
-  <div class= 'insta fade-scroll'>
-    <div class='top-insta'>
-      <a href='https://goo.gl/Y9YWLo' target='_blank'><img src='<%=post.UserDp %>'></a>
-      <a href='https://goo.gl/Y9YWLo' target='_blank' class='user red-text'><%=post.UserName %>
-</a>
-      <span class= 'dot'></span>
-    </div>
-    <div class='post'>
-        <div class="overlay">
-        <span></span>
-        </div>
-      <img src='<%=post.ProductDp %>' >
- </div>
-    <div class='footer'>
-      
-        <div id="reactio-bar" class="left " style="
+    <section id="sec2">
+        <div class='insta fade-scroll'>
+            <div class='top-insta'>
+                <a href='https://goo.gl/Y9YWLo' target='_blank'><img src='<%=post.UserDp %>'></a>
+                <a href='https://goo.gl/Y9YWLo' target='_blank' class='user red-text'>
+                    <%=post.UserName %>
+                </a>
+                <span class='dot'></span>
+            </div>
+            <div class='post'>
+                <div class="overlay">
+                    <span></span>
+                </div>
+                <img src='<%=post.ProductDp %>'>
+            </div>
+            <div class='footer'>
+
+                <div id="reactio-bar" class="left " style="
         display:flex!important; justify-content: flex-start!important; width: 15%;">
-                <a href="#1" role="button" onclick="like('<%=post._id %>')">
-                    <i class="material-icons red-text">favorite_border</i></a>
-                <a href="#2" role="button" onclick="save('<%= post._id %>')">
-                    <i class="material-icons red-text">bookmark_border</i></a>
-                <!--<a href="#3" role="button" id="CartButton<%= post._id %>"
+                    <a href="#1" role="button" onclick="like('<%=post._id %>')">
+                        <i class="material-icons red-text">favorite_border</i></a>
+                    <a href="#2" role="button" onclick="save('<%= post._id %>')">
+                        <i class="material-icons red-text">bookmark_border</i></a>
+                    <!--<a href="#3" role="button" id="CartButton<%= post._id %>"
                     onclick="cart('<%= post._id %>')"> <i class="material-icons red-text">shopping_basket_border</i></a>-->
 
-            </div>
-      
-      <div class='caption '>
-        <a href='# 'class="red-text"><%=post.Title %></a><div><%=post.Description%></div>
-      </div>
-      
-      <div class='comment-section' id="Comment<%= post._id %>">
-            <form method="put">
-                    <input type="hidden" name="productid" value="<%= post._id %>"></input>
-                    <input type="text" name="comment" cols="30" id="text<%= post._id %>"
-                    rows="1" placeholder="Add comment..."
-                    required></input>
+                </div>
 
-            </form>
-        <span class='dot02'></span>
+                <div class='caption '>
+                    <a href='# ' class="red-text">
+                        <%=post.Title %></a>
+                    <div>
+                        <%=post.Description%>
+                    </div>
+                </div>
+
+                <div class='comment-section' id="Comment<%= post._id %>">
+                    <form method="put">
+                        <input type="hidden" name="productid" value="<%= post._id %>"></input>
+                        <input type="text" name="comment" cols="30" id="text<%= post._id %>" rows="1" placeholder="Add comment..."
+                            required></input>
+
+                    </form>
+                    <span class='dot02'></span>
 
 
 
-<!--
+                    <!--
         <% post.Comments.forEach( function(com) { %>
             <div class="comment-wrap">
                 <div class="photo">
@@ -87,83 +92,82 @@
             </div>
             <% }) %>
         -->
-      </div>
-
-
-
-      
+                </div>
 
 
 
 
-        
-    </div> <!-- end Footer -->
-    
-  </div> <!-- end Insta -->
-  <div class="a1 fade-scroll"></div>
-  <div class="a1 fade-scroll"></div>
-  <div class="a1 fade-scroll"></div>
-  <div class="a1 fade-scroll"></div>
-  <div class="a1 fade-scroll"></div>
-</section> <!-- end section -->
-<% }) %>
+
+
+
+
+
+            </div> <!-- end Footer -->
+
+        </div> <!-- end Insta -->
+        <div class="a1 fade-scroll"></div>
+        <div class="a1 fade-scroll"></div>
+        <div class="a1 fade-scroll"></div>
+        <div class="a1 fade-scroll"></div>
+        <div class="a1 fade-scroll"></div>
+    </section> <!-- end section -->
+    <% }) %>
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script>
-
     function like(item) {
 
-$.ajax({
+        $.ajax({
 
-    url: '/like/' + item,
-    type: 'PUT',
-    success: function () {
+            url: '/like/' + item,
+            type: 'PUT',
+            success: function () {
 
+            }
+
+        });
+        event.preventDefault();
     }
 
-});
-event.preventDefault();
-}
 
+    function save(item) {
 
-function save(item) {
+        $.ajax({
 
-$.ajax({
+            url: '/bookmark/' + item,
+            type: 'PUT',
+            success: function () {
 
-    url: '/bookmark/' + item,
-    type: 'PUT',
-    success: function () {
+            }
 
+        });
+        event.preventDefault();
     }
 
-});
-event.preventDefault();
-}
 
+    function cart(item) {
 
-function cart(item) {
+        $.ajax({
 
-$.ajax({
+            url: '/AddToCart/' + item,
+            type: 'PUT',
+            success: function () {
 
-    url: '/AddToCart/' + item,
-    type: 'PUT',
-    success: function () {
+            }
 
+        });
+        event.preventDefault();
     }
 
-});
-event.preventDefault();
-}
 
 
 
 
 
 
-
-$("form").on('submit', function (e) {
+    $("form").on('submit', function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -188,9 +192,6 @@ $("form").on('submit', function (e) {
 
 
     });
-
-
-
 </script>
-</html>
 
+</html>

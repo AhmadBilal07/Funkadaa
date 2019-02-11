@@ -2,7 +2,7 @@
 
 <style media="screen">
 
-   .modal
+    .modal
     {
     top:70px!important;
     background-color: rgba(0,0,0,.10000) !important;
@@ -85,139 +85,138 @@ body {
 
 
 
-               
 
-            <section id="section">
-                    <div class="container gal-container">
-    
-                            <% Myproducts.forEach( function(product,index) { %>
-                                <div class="col-md-4 col-sm-6 co-xs-12 gal-item">
-            
-            
-                                    <div class="box">
-                                        <a href="#" data-toggle="modal" data-target="#<%=index %>" onclick="ForSale('<%= product.ForSale %>','<%= product._id %>')">
-                                            <img src='<%= product.ProductDp %>'>
-                                        </a>
-                                        <div class="modal modal-fullscreen fade" id="<%=index %>" tabindex="-1" role="dialog" style="overflow:visible!important;">
-                                            <div class="modal-dialog" id="<%=index %>" role="document">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                                        aria-hidden="true">×</span></button>
-            
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div> <img src='<%= product.ProductDp %>'></div>
-                                                                    <div>
-                                                                        <h4 class="description">
-                                                                            <%= product.Title %>
-                                                                        </h4>
-                                                                    </div>
-            
-                                                                </div>
-            
-                                                                <div class="col-md-6">
-                                                                    <div id="PostHeader">
-                                                                        <div class="photo">
-                                                                            <div class="avatar" style="background-image: url('<%= product.UserDp %>');  "></div>
-                                                                        </div>
-                                                                        <div class="black-text">
-                                                                            <b>
-                                                                                <%= product.UserName %></b>
-                                                                        </div>
-                                                                        <div>
-            
-                                                                        </div>
-                                                                        <div class="description-block" style="margin-top: 10px;width: 100%; width: 100%;border: 2px solid #f44336; padding: 10px;">
-                                                                            <b>Description:</b><br>
-                                                                            <%= product.Description %>
-                                                                        </div>
-                                                                        <br>
-            
-                                                                        <div id="reactio-bar" class="left " style="    margin-left: -320px;
+
+    <section id="section">
+        <div class="container gal-container">
+
+            <% Myproducts.forEach( function(product,index) { %>
+            <div class="col-md-4 col-sm-6 co-xs-12 gal-item">
+
+
+                <div class="box">
+                    <a href="#" data-toggle="modal" data-target="#<%=index %>" onclick="ForSale('<%= product.ForSale %>','<%= product._id %>')">
+                        <img src='<%= product.ProductDp %>'>
+                    </a>
+                    <div class="modal modal-fullscreen fade" id="<%=index %>" tabindex="-1" role="dialog" style="overflow:visible!important;">
+                        <div class="modal-dialog" id="<%=index %>" role="document">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div> <img src='<%= product.ProductDp %>'></div>
+                                                <div>
+                                                    <h4 class="description">
+                                                        <%= product.Title %>
+                                                    </h4>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div id="PostHeader">
+                                                    <div class="photo">
+                                                        <div class="avatar" style="background-image: url('<%= product.UserDp %>');  "></div>
+                                                    </div>
+                                                    <div class="black-text">
+                                                        <b>
+                                                            <%= product.UserName %></b>
+                                                    </div>
+                                                    <div>
+
+                                                    </div>
+                                                    <div class="description-block" style="margin-top: 10px;width: 100%; width: 100%;border: 2px solid #f44336; padding: 10px;">
+                                                        <b>Description:</b><br>
+                                                        <%= product.Description %>
+                                                    </div>
+                                                    <br>
+
+                                                    <div id="reactio-bar" class="left " style="    margin-left: -320px;
                                                                     display:flex!important; justify-content: flex-start!important; width: 50%;">
-                                                                            <a href="#1" role="button" onclick="like('<%= product._id %>')">
-                                                                                <i class="material-icons red-text">favorite_border</i></a>
-            
-            
-                                                                            <a href="#2" role="button" onclick="save('<%= product._id %>')">
-                                                                                <i class="material-icons red-text">bookmark_border</i></a>
-                                                                            <a href="#3" role="button" id="CartButton<%= product._id %>"
-                                                                                onclick="cart('<%= product._id %>')"> <i class="material-icons red-text">shopping_basket_border</i></a>
-            
-                                                                        </div>
-            
-                                                                    </div>
-            
-                                                                    <span style="color:#f44336;text-align: center!important;font-weight:bold;display :block;">
-                                                                        Comments</span>
-            
-            
-                                                                    <div class="comments" id="Comment<%= product._id %>" style="overflow:auto;">
-            
-                                                                        <div class="comment-wrap">
-                                                                            <div class="photo">
-                                                                                <div class="avatar" style="background-image: url('<%= User.Userdp %>')"></div>
-                                                                            </div>
-                                                                            <div class="comment-block">
-                                                                                <form method="put" class="comment">
-                                                                                    <input type="hidden" name="productid" value="<%= product._id %>"></input>
-                                                                                    <input type="text" name="comment" cols="30" id="text<%= product._id %>"
-                                                                                        rows="1" placeholder="Add comment..."
-                                                                                        required></input>
-            
-                                                                                </form>
-            
-                                                                            </div>
-            
-                                                                        </div>
-                                                                        <% product.Comments.forEach( function(com) { %>
-                                                                        <div class="comment-wrap">
-                                                                            <div class="photo">
-                                                                                <div class="avatar" style="background-image: url('<%= com.UserDp %>')"></div>
-                                                                            </div>
-                                                                            <div class="comment-block">
-                                                                                <p class="comment-text">
-                                                                                    <%= com.CommentText%>
-                                                                                </p>
-                                                                                <div class="bottom-comment">
-                                                                                    <div class="comment-date red-text bold">
-                                                                                        <%= com.UserName %>
-                                                                                    </div>
-                                                                                    <ul class="comment-actions">
-                                                                                        <li class="complain">Complain</li>
-                                                                                        <li class="reply">Reply</li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-            
-                                                                        </div>
-                                                                        <% }) %>
-            
-                                                                    </div>
-            
+                                                        <a href="#1" role="button" onclick="like('<%= product._id %>')">
+                                                            <i class="material-icons red-text">favorite_border</i></a>
+
+
+                                                        <a href="#2" role="button" onclick="save('<%= product._id %>')">
+                                                            <i class="material-icons red-text">bookmark_border</i></a>
+                                                        <a href="#3" role="button" id="CartButton<%= product._id %>"
+                                                            onclick="cart('<%= product._id %>')"> <i class="material-icons red-text">shopping_basket_border</i></a>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <span style="color:#f44336;text-align: center!important;font-weight:bold;display :block;">
+                                                    Comments</span>
+
+
+                                                <div class="comments" id="Comment<%= product._id %>" style="overflow:auto;">
+
+                                                    <div class="comment-wrap">
+                                                        <div class="photo">
+                                                            <div class="avatar" style="background-image: url('<%= User.Userdp %>')"></div>
+                                                        </div>
+                                                        <div class="comment-block">
+                                                            <form method="put" class="comment">
+                                                                <input type="hidden" name="productid" value="<%= product._id %>"></input>
+                                                                <input type="text" name="comment" cols="30" id="text<%= product._id %>"
+                                                                    rows="1" placeholder="Add comment..." required></input>
+
+                                                            </form>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <% product.Comments.forEach( function(com) { %>
+                                                    <div class="comment-wrap">
+                                                        <div class="photo">
+                                                            <div class="avatar" style="background-image: url('<%= com.UserDp %>')"></div>
+                                                        </div>
+                                                        <div class="comment-block">
+                                                            <p class="comment-text">
+                                                                <%= com.CommentText%>
+                                                            </p>
+                                                            <div class="bottom-comment">
+                                                                <div class="comment-date red-text bold">
+                                                                    <%= com.UserName %>
                                                                 </div>
-                                                            </div><br>
-                                                            <div class="row">
-            
-                                                                <div class="col-md-6 ">
-            
-                                                                </div>
+                                                                <ul class="comment-actions">
+                                                                    <li class="complain">Complain</li>
+                                                                    <li class="reply">Reply</li>
+                                                                </ul>
                                                             </div>
                                                         </div>
+
                                                     </div>
+                                                    <% }) %>
+
                                                 </div>
+
+                                            </div>
+                                        </div><br>
+                                        <div class="row">
+
+                                            <div class="col-md-6 ">
+
                                             </div>
                                         </div>
-            
                                     </div>
                                 </div>
-                                <% }) %>
-            
+                            </div>
+                        </div>
                     </div>
-                </section>
-    
+
+                </div>
+            </div>
+            <% }) %>
+
+        </div>
+    </section>
+
 
 
 
@@ -330,7 +329,7 @@ body {
     <script>
         $(document).ready(function () {
 
-         //   $('select').formSelect();
+            //   $('select').formSelect();
         });
 
         $(document).ready(function () {
@@ -389,95 +388,94 @@ body {
 
         });
 
-    $('ul.tabs .tab').each(function checkActive(item) {
-        var $a = $(this).find('a');
-        if (location.pathname === $a.attr('href')) {
-            $('.tabs .active').removeClass("active");
-            $a.addClass("active");
+        $('ul.tabs .tab').each(function checkActive(item) {
+            var $a = $(this).find('a');
+            if (location.pathname === $a.attr('href')) {
+                $('.tabs .active').removeClass("active");
+                $a.addClass("active");
+            }
+        });
+
+
+        $(".comment").on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+
+                url: '/comment',
+                type: 'PUT',
+                data: $(this).serialize(),
+                success: function (response) {
+                    $("#text" + response.Productid).val('');
+                    $("#Comment" + response.Productid).append(
+                        "     <div class='comment-wrap'><div class='photo'><div class='avatar' style='background-image: url(" +
+                        response.UserDp +
+                        ")'></div></div><div class='comment-block'><p class='comment-text'>" +
+                        response.Comment +
+                        "</p><div class='bottom-comment'><div class='comment-date'>" + response
+                        .UserName +
+                        "</div><ul class='comment-actions'><li class='complain'>Complain</li><li class='reply'>Reply</li></ul></div></div></div>"
+                    );
+
+                }
+
+            });
+
+
+        });
+
+
+        function ForSale(s, id) {
+
+            if (s == "false") {
+                $('#CartButton' + id).hide();
+            }
         }
-    });
-    
 
-$(".comment").on('submit', function (e) {
-        e.preventDefault();
+        function like(item) {
 
-        $.ajax({
+            $.ajax({
 
-            url: '/comment',
-            type: 'PUT',
-            data: $(this).serialize(),
-            success: function (response) {
-                $("#text" + response.Productid).val('');
-                $("#Comment" + response.Productid).append(
-                    "     <div class='comment-wrap'><div class='photo'><div class='avatar' style='background-image: url(" +
-                    response.UserDp +
-                    ")'></div></div><div class='comment-block'><p class='comment-text'>" +
-                    response.Comment +
-                    "</p><div class='bottom-comment'><div class='comment-date'>" + response.UserName +
-                    "</div><ul class='comment-actions'><li class='complain'>Complain</li><li class='reply'>Reply</li></ul></div></div></div>"
-                );
+                url: '/like/' + item,
+                type: 'PUT',
+                success: function () {
 
-            }
+                }
 
-        });
-
-
-    });
-
-
-    function ForSale(s, id) {
-
-        if (s == "false") {
-            $('#CartButton' + id).hide();
+            });
+            event.preventDefault();
         }
-    }
-
-    function like(item) {
-
-        $.ajax({
-
-            url: '/like/' + item,
-            type: 'PUT',
-            success: function () {
-
-            }
-
-        });
-        event.preventDefault();
-    }
 
 
-    function save(item) {
+        function save(item) {
 
-        $.ajax({
+            $.ajax({
 
-            url: '/bookmark/' + item,
-            type: 'PUT',
-            success: function () {
+                url: '/bookmark/' + item,
+                type: 'PUT',
+                success: function () {
 
-            }
+                }
 
-        });
-        event.preventDefault();
-    }
-
-
-    function cart(item) {
-
-        $.ajax({
-
-            url: '/AddToCart/' + item,
-            type: 'PUT',
-            success: function () {
-
-            }
-
-        });
-        event.preventDefault();
-    }
+            });
+            event.preventDefault();
+        }
 
 
-</script>
+        function cart(item) {
+
+            $.ajax({
+
+                url: '/AddToCart/' + item,
+                type: 'PUT',
+                success: function () {
+
+                }
+
+            });
+            event.preventDefault();
+        }
+    </script>
 
 </body>
 
