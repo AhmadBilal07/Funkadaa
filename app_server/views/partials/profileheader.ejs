@@ -1,0 +1,25 @@
+<div class="col-lg-6 col-sm-6" style="width:100%;">
+    <div class="card hovercard">
+        <div class="card-background white">
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red right modal-trigger " style='top:-40px!important;'
+            data-target="modal1"><i class="material-icons ">file_upload</i></a>
+
+        <div class="useravatar">
+            <img alt="" id="dp" src='<%= User.Userdp %>'>
+
+        </div>
+        <div class="card-info"> <span class="card-title">
+                <%= User.Name %></span>
+
+        </div>
+    </div>    <div class="col s12 fixme profile-section-container">
+                    <ul class="tabs   tabs-fixed-width white red-text lighten-1 z-depth-3" id="tabs-swipe-demo">
+                        <li class="tab col s3"><a class="active" href="/profile" target="_parent"><b>My POSTS</b></a></li>
+                        <li class="tab col s3"><a href="/profile/saved" target="_parent"><b>SAVED</b></a></li>
+                        <li class="tab col s3"><a href="/profile/following" target="_parent"><b>FOLLOWING</b></a></li>
+                        <li class="tab col s3"><a href="/profile/followers" target="_parent"><b>FOLLOWERS</b></a></li>
+    
+                    </ul>
+                </div>
+        

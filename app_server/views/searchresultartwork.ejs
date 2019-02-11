@@ -1,0 +1,373 @@
+<head>
+    <% include partials/head %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Funkadaa</title>
+
+</head>
+<style>
+    #tabs-swipe-demo{
+    margin-top: 20px;
+}
+
+.fixme {  text-align: center; width: 100%; }
+
+ .modal
+    {
+    top:70px!important;
+    background-color: rgba(0,0,0,.10000) !important;
+    overflow: hidden!important;
+    padding: 0px!important;
+    }
+   
+    #main
+    {
+    z-index: 2!important;
+    }
+    img,#test1
+    {
+    z-index: -1!important;
+    }
+
+    #section
+    {
+    z-index: 0!important;
+    }
+</style>
+
+<body>
+    <% include partials/header %>
+    <div class="col s12 fixme profile-section-container">
+        <ul class="tabs   tabs-fixed-width white red-text lighten-1 z-depth-3" id="tabs-swipe-demo">
+            <li class="tab col s3"><a href="/search" target="_parent" id="Artwork" class="active"><b>Art Works</b></a></li>
+            <li class="tab col s3"><a href="/search/people" target="_parent"><b>People</b></a></li>
+
+        </ul>
+    </div>
+
+
+    <section>
+        <div class="container gal-container" id="cont">
+
+
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<script>
+    function toObject(arr, dp) {
+        var rv = {};
+        for (var i = 0; i < arr.length; ++i)
+            rv[arr[i]] = dp[i];
+        return rv;
+    }
+
+    $('#searchbarslot').on('keyup paste', '#search', function () {
+        if (this.value.length >= 1) {
+
+
+            $.ajax({
+                type: "get",
+                url: "/search/" + this.value,
+                success: function (res) {
+                    let resultTitle = res.products.map(a => a.Title);
+                    let resultDp = res.products.map(a => a.ProductDp);
+
+                    result = toObject(resultTitle, resultDp);
+
+                    $('input.autocomplete').autocomplete({
+                        data: result,
+                    });
+
+
+
+
+
+
+
+
+
+
+
+                }
+            });
+
+
+
+
+            ajaxFunction(this.value);
+
+
+        }
+    })
+
+
+
+    var ajaxFunction = function (data) {
+        $.ajax({
+            type: "get",
+            url: "/search/" + data,
+            success: function (res) {
+                $('#cont ').html('');
+                loadresult(res);
+            }
+        });
+    }
+
+    $("#cont").on('submit', 'form', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+
+            url: '/comment',
+            type: 'PUT',
+            data: $(this).serialize(),
+            success: function (response) {
+                $("#text" + response.Productid).val('');
+                $("#Comment" + response.Productid).append(
+                    "     <div class='comment-wrap'><div class='photo'><div class='avatar' style='background-image: url(" +
+                    response.UserDp +
+                    ")'></div></div><div class='comment-block'><p class='comment-text'>" +
+                    response.Comment +
+                    "</p><div class='bottom-comment'><div class='comment-date'>" + response.UserName +
+                    "</div><ul class='comment-actions'><li class='complain'>Complain</li><li class='reply'>Reply</li></ul></div></div></div>"
+                );
+
+            }
+
+        });
+
+
+    });
+
+    loadresult = function loadresult(result) {
+
+
+        result.products.forEach((product, index) => {
+
+            $("#cont").append(
+                " <div class='col-md-4 col-sm-6 co-xs-12 gal-item'><div class='box'><a href='#' data-toggle='modal' data-target='#" +
+                index +
+                "'><img src=" + product.ProductDp + "></a><div class='modal modal-fullscreen fade' id=" +
+                index +
+                " tabindex='-1' role='dialog' style='overflow:visible!important;'><div class='modal-dialog' id=" +
+                index +
+                " role='document'><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span></button><div class='modal-content'><div class='modal-body'><div class='container-fluid'><div class='row'><div class='col-md-6'><div> <img src=" +
+                product.ProductDp +
+                "></div><div><h4 class='description'>" +
+                product.Title +
+                "</h4> </div> </div> <div class='col-md-6'> <div id='PostHeader'><div class='photo'><div class='avatar' style='background-image: url(" +
+                product.UserDp +
+                "); '></div></div><div class='black-text'><b>" +
+                product.UserName +
+                "</b> </div><div></div><div class='description-block' style='margin-top: 10px;width: 100%; width: 100%;border: 2px solid #f44336; padding: 10px;'><b>Description:</b><br>" +
+                product.Description +
+                "</div><br><div id='reactio-bar'class='left' style='    margin-left: -320px; display:flex!important; justify-content: flex-start!important; width: 50%;'><a href='#1' class='like' data-id=" +
+                product._id + " role='button' onclick=like(" + product._id +
+                ")><i class='material-icons red-text'>favorite_border</i></a><a href='#2' role='button' class='save' data-id=" +
+                product._id + "  onclick =save(" + product._id +
+                ")><i class='material-icons red-text'>bookmark_border</i></a><a href='#3' role='button' class='cart' data-id=" +
+                product._id + " id='CartButton" +
+                product._id + " onclick='cart(" + product._id +
+                ")'> <i class='material-icons red-text'>shopping_basket_border</i></a></div> </div> <span style='color:#f44336;text-align: center!important;font-weight:bold;display :block;'> Comments</span><div class='comments' id='Comment" +
+                product._id +
+                "' style='overflow:auto;'><div class='comment-wrap'> <div class='photo'><div class='avatar' style='background-image:url(" +
+                result.User.Userdp +
+                ")'></div></div><div class='comment-block'> <form method='put'><input type='hidden' name='productid' value=" +
+                product._id + "></input><input type='text' name='comment' cols='30'id='text" +
+                product._id +
+                "rows='1' placeholder='Add comment...' required></input></form></div> </div></div></div> </div><br><div class='row'><div class='col-md-6 '></div></div></div></div></div></div></div></div></div>"
+            );
+
+            product.Comments.forEach((com) => {
+
+                $("#Comment" + product._id).append(
+                    "<div class='comment-wrap'><div class='photo'><div class='avatar' style='background-image: url(" +
+                    com.UserDp +
+                    ")'></div></div><div class='comment-block'><p class='comment-text'>" +
+                    com.CommentText +
+                    " </p><div class='bottom-comment'><div class='comment-date red-text bold'>" +
+                    com.UserName +
+                    "</div><ul class='comment-actions'><li class='complain'>Complain</li><li class='reply'>Reply</li></ul></div></div></div>"
+                );
+            })
+
+        });
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+    $('ul.tabs .tab').each(function checkActive(item) {
+        var $a = $(this).find('a');
+
+        if (location.pathname.indexOf('/search/people') === 0) {
+            $('.tabs .active').removeClass("active");
+            $a.addClass("active");
+        }
+    });
+
+
+    $('select').material_select();
+    var fixmeTop = $('.fixme').offset().top;
+    $(window).scroll(function () {
+        var currentScroll = $(window).scrollTop();
+        if (currentScroll >= fixmeTop - 270) {
+            $('.fixme').css({
+                position: 'fixed',
+                top: '50px',
+                left: '0',
+
+            });
+        } else {
+            $('.fixme').css({
+                position: 'static',
+
+            });
+        }
+    });
+
+    function ForSale(s, id) {
+
+        if (s == "false") {
+            $('#CartButton' + id).hide();
+        }
+    }
+
+
+
+
+
+    $(document).on('click', '.like', function () {
+
+
+        var item = $(this).data('id');
+        console.log(item);
+        event.preventDefault();
+        $.ajax({
+
+            url: '/like/' + item,
+            type: 'PUT',
+            success: function () {
+
+            }
+
+        })
+    })
+
+
+
+    $(document).on('click', '.save', function () {
+
+
+        var item = $(this).data('id');
+        console.log(item);
+        event.preventDefault();
+        $.ajax({
+
+            url: '/bookmark/' + item,
+            type: 'PUT',
+            success: function () {
+
+            }
+
+        })
+    })
+
+
+
+
+
+    $(document).on('click', '.cart', function () {
+
+
+        var item = $(this).data('id');
+        console.log(item);
+        event.preventDefault();
+        $.ajax({
+
+            url: '/AddToCart/' + item,
+            type: 'PUT',
+            success: function () {
+
+            }
+
+
+        })
+    })
+
+
+
+
+    $(document).ready(function () {
+        $('#searchbarslot').append(
+            '<form method="GET" id="searchform"><input name="text"  type="text" id="search"  class="autocomplete black-text" placeholder="Search.." style="z-index:9999999999999;"></form>'
+        ).css('display', 'block');
+    });
+
+
+
+
+    $('#searchbarslot').on('submit', '#searchform', function (e) {
+        ajaxFunction(this.value);
+
+        e.preventDefault();
+        /*let query = $('#search', this).val();
+        while (query.indexOf("  ") !== -1) {
+            query = query.replace(/  /g, ' ');
+        }
+
+        if (window.location.pathname.indexOf('/search/people') === 0) {
+            window.location.pathname = encodeURI('/search/people/' + query.split(' ').join('+'));
+        } else {
+            window.location.pathname = encodeURI('/search/' + query.split(' ').join('+'));
+        }*/
+    });
+
+
+
+    $("#searchbutton").on('click', function (e) {
+        e.preventDefault();
+        console.log($('#searchform').value);
+    });
+</script>
+
+
+
+
+</html>

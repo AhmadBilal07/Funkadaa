@@ -1,0 +1,221 @@
+<head>
+    <% include partials/head %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Funkadaa</title>
+
+</head>
+<style>
+    .mybox {
+        width: 24% !important;
+        height: auto;
+        margin-top: 2%;
+        margin-right: 0.5%;
+        margin-left: 0.5%;
+        flex-wrap: wrap;
+    }
+     #tabs-swipe-demo{
+        margin-top: 20px;
+    }
+    
+    .fixme {  text-align: center; width: 100%; }
+    
+     .modal
+        {
+        top:70px!important;
+        background-color: rgba(0,0,0,.10000) !important;
+        overflow: hidden!important;
+        padding: 0px!important;
+        }
+       
+        #main
+        {
+        z-index: 2!important;
+        }
+        img,#test1
+        {
+        z-index: -1!important;
+        }
+    
+        #section
+        {
+        z-index: 0!important;
+        }
+    </style>
+
+<body>
+    <% include partials/header %>
+    <div class="col s12 fixme profile-section-container">
+        <ul class="tabs   tabs-fixed-width white red-text lighten-1 z-depth-3" id="tabs-swipe-demo">
+            <li class="tab col s3"><a href="/search" target="_parent" id="Artwork" class="active"><b>Art Works</b></a></li>
+            <li class="tab col s3"><a href="/search/people" target="_parent"><b>People</b></a></li>
+
+        </ul>
+    </div>
+
+
+    <div style="display:flex;flex-wrap:wrap;">
+        <% Person.forEach( var1 =>{ %>
+        <!-- code start -->
+        <div class="twPc-div mybox">
+            <a class="twPc-bg twPc-block"></a>
+
+            <div>
+                <div class="twPc-button">
+                   
+                        <button class="btn circle waves-effect waves-light white red-text" id= "<%= var1._id %>" onclick="follow(id)" >Follow
+                        </button>
+                   
+                </div>
+
+                <a title="Mert S. Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                    <img alt="Mert S. Kaplan" src='<%= var1.Userdp %>' class="twPc-avatarImg">
+                </a>
+
+                <div class="twPc-divUser">
+                    <div class="twPc-divName">
+                        <a href="https://twitter.com/mertskaplan">
+                            <%= var1.Name %></a>
+                    </div>
+
+                </div>
+
+                <div class="twPc-divStats">
+                    <ul class="twPc-Arrange">
+                        <li class="twPc-ArrangeSizeFit">
+                            <a href="https://twitter.com/mertskaplan" title="9.840 Tweet">
+                                <span class="twPc-StatLabel twPc-block">Posts</span>
+                                <span class="twPc-StatValue">
+                                    <%= var1.Posts %></span>
+                            </a>
+                        </li>
+                        <li class="twPc-ArrangeSizeFit">
+                            <a href="https://twitter.com/mertskaplan/following" title="885 Following">
+                                <span class="twPc-StatLabel twPc-block">Following</span>
+                                <span class="twPc-StatValue">
+                                    <%= var1.Followings.length %></span>
+                            </a>
+                        </li>
+                        <li class="twPc-ArrangeSizeFit">
+                            <a href="https://twitter.com/mertskaplan/followers" title="1.810 Followers">
+                                <span class="twPc-StatLabel twPc-block">Followers</span>
+                                <span class="twPc-StatValue">
+                                    <%= var1.Followers.length %></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<script>
+    $('ul.tabs .tab').each(function checkActive(item) {
+        var $a = $(this).find('a');
+
+        if (location.pathname.indexOf('/search/people') === 0) {
+            $('.tabs .active').removeClass("active");
+            $a.addClass("active");
+        }
+    });
+
+
+
+function follow(item){
+
+ $.ajax({  
+                url: '/follow/'+item,  
+                type: 'PUT',
+                success: function() 
+                {
+                    alert("followed");
+                }  
+                  
+ });
+}
+
+    $('select').material_select();
+    var fixmeTop = $('.fixme').offset().top;
+    $(window).scroll(function () {
+        var currentScroll = $(window).scrollTop();
+        if (currentScroll >= fixmeTop - 270) {
+            $('.fixme').css({
+                position: 'fixed',
+                top: '50px',
+                left: '0',
+
+            });
+        } else {
+            $('.fixme').css({
+                position: 'static',
+
+            });
+        }
+    });
+
+
+
+    $(document).ready(function () {
+        $('#searchbarslot').append(
+            '<form method="GET" id="searchform"><input name="text"  type="text" id="search"  class="autocomplete black-text" placeholder="Search.." style="z-index:9999999999999;"></form>'
+        ).css('display', 'block');
+    });
+
+
+    $(document).ready(function () {
+        $('input.autocomplete').autocomplete({
+            data: {
+                "Apple": null,
+                "Ali": null,
+                "Ahmad": null,
+                "Microsoft": null,
+                "Google": 'https://placehold.it/250x250'
+            },
+        });
+    });
+
+
+    $('#searchbarslot').on('submit', '#searchform', function (e) {
+        e.preventDefault();
+        let query = $('#search', this).val();
+        while (query.indexOf("  ") !== -1) {
+            query = query.replace(/  /g, ' ');
+        }
+        
+        if(window.location.pathname.indexOf('/search/people') === 0) {
+            window.location.pathname = encodeURI('/search/people/' + query.split(' ').join('+'));
+        }
+        else {
+            window.location.pathname = encodeURI('/search/' + query.split(' ').join('+'));
+        }
+    });
+</script>
+
+
+
+
+</html>

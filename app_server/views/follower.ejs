@@ -1,0 +1,169 @@
+<html>
+
+<style media="screen">
+    .mybox {
+        width: 24% !important;
+        height: auto;
+        margin-top: 2%;
+        margin-right: 0.5%;
+        margin-left: 0.5%;
+        flex-wrap: wrap;
+    }
+
+    .btn-flat {
+        border-radius: 20px !important;
+    }
+    
+.fixme {  text-align: center; width: 100%; }
+</style>
+
+<head>
+
+    <% include partials/head %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Funkadaa</title>
+
+</head>
+
+<body>
+    <% include partials/header %>
+    <% include partials/profileheader %>
+
+
+
+    <br><br><br>
+<div style="display:flex;flex-wrap:wrap;">
+    <% Person.forEach( var1 =>{ %>
+    <!-- code start -->
+    <div class="twPc-div mybox">
+        <a class="twPc-bg twPc-block"></a>
+
+        <div>
+            <div class="twPc-button">
+                <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+                <a href="https://twitter.com/mertskaplan" class="btn-flat white red-text z-depth-3">Follow</a>
+            </div>
+
+            <a title="Mert S. Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
+                <img alt="Mert S. Kaplan" src='<%= var1.Userdp %>' class="twPc-avatarImg">
+            </a>
+
+            <div class="twPc-divUser">
+                <div class="twPc-divName">
+                    <a href="https://twitter.com/mertskaplan">
+                        <%= var1.Name %></a>
+                </div>
+
+            </div>
+
+            <div class="twPc-divStats">
+                <ul class="twPc-Arrange">
+                    <li class="twPc-ArrangeSizeFit">
+                        <a href="https://twitter.com/mertskaplan" title="9.840 Tweet">
+                            <span class="twPc-StatLabel twPc-block">Posts</span>
+                            <span class="twPc-StatValue">
+                                <%= var1.Posts %></span>
+                        </a>
+                    </li>
+                    <li class="twPc-ArrangeSizeFit">
+                        <a href="https://twitter.com/mertskaplan/following" title="885 Following">
+                            <span class="twPc-StatLabel twPc-block">Following</span>
+                            <span class="twPc-StatValue">
+                                <%= var1.Followings.length %></span>
+                        </a>
+                    </li>
+                    <li class="twPc-ArrangeSizeFit">
+                        <a href="https://twitter.com/mertskaplan/followers" title="1.810 Followers">
+                            <span class="twPc-StatLabel twPc-block">Followers</span>
+                            <span class="twPc-StatValue">
+                                <%= var1.Followers.length %></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>
+
+</body>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('select').formSelect();
+        });
+
+        $(document).ready(function () {
+
+            $('ul.tabs').tabs({
+                //        swipeable: true,
+                responsiveThreshold: 1920,
+            });
+
+        });
+        $(document).ready(function () {
+            $(".btn-pref .btn").click(function () {
+                $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+                // $(".tab").addClass("active"); // instead of this do the below 
+                $(this).removeClass("btn-default").addClass("btn-primary");
+            });
+        });
+        $('select').material_select();
+        var fixmeTop = $('.fixme').offset().top;
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= fixmeTop - 270) {
+                $('.fixme').css({
+                    position: 'fixed',
+                    top: '70px',
+                    left: '0',
+
+                });
+            } else {
+                $('.fixme').css({
+                    position: 'static',
+
+                });
+            }
+        });
+
+        $('#checkbox').click(function () {
+            $(".saleoption").toggleClass("bold");
+            if ($(this).is(':checked')) {
+                $('#price').removeAttr('disabled');
+                $('#quantity').removeAttr('disabled');
+
+            } else {
+                $('#price').attr('disabled', 'disabled');
+                $('#quantity').attr('disabled', 'disabled');
+
+            }
+
+        });
+
+
+          $('ul.tabs .tab').each(function checkActive(item) {
+        var $a = $(this).find('a');
+        if (location.pathname === $a.attr('href')) {
+            $('.tabs .active').removeClass("active");
+            $a.addClass("active");
+        }
+    });
+    
+    </script>
+
+</body>
+
+</html>

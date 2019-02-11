@@ -1,0 +1,47 @@
+<ul id="dropdown1" class="dropdown-content ">
+  <li><a href="#">One</a></li>
+  <li><a href="#">Two</a></li>
+  <li class="divider"></li>
+  <li><a href="\logout">Logout</a></li>
+</ul>
+
+<ul id="dropdown2" class="dropdown-content">
+  <li><a href="#">One</a></li>
+  <li><a href="#">Two</a></li>
+  <li class="divider"></li>
+  <li><a href="\logout">Logout</a></li>
+</ul>
+<!--  <div class="navbar-fixed"> -->
+<nav style="position:fixed; top:0;left:0;right:0;z-index:9999; " class="z-depth-3">
+  <div class="nav-wrapper white lighten-1 ">
+    <a href="\home" class="brand-logo"><img src="/images/4.png" alt="Logo">
+    </a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse red-text"><i class="material-icons">menu </i></a>
+    <div class="categories-container pin-top" style="top: 0px;">
+
+      <ul class="right hide-on-med-and-down   categories db" >
+        <li id="searchbarslot" style="width:190px;display: none;" >
+        </li>
+        <li><a href="/search" class="red-text"  id="searchbutton"> <i class="material-icons">search</i> </a></li>
+        <li><a href="/globalfeed" class="red-text"> <i class="material-icons">public</i> </a></li>
+        <li><a href="/home" class="red-text"> <i class="material-icons">home</i> </a></li>
+        <li><a href="/profile" class="red-text"> <i class="material-icons">person</i> </a></li>
+        <li><a href="/cart" class="red-text"> <i class="material-icons">shopping_cart</i> </a></li>
+        <!--<li><a href="#" class="red-text"> <i class="material-icons">notifications</i> </a></li>-->
+        <li><a href="" class="dropdown-button red-text" data-activates="dropdown1">More<i class="material-icons right ">arrow_drop_down</i></a></li>
+      </ul>
+      <ul id="mobile-demo" class="side-nav">
+          <li><a href="/search"  id="searchbutton" class="red-text"> <i class="material-icons">search</i> </a></li>
+        <li><a href="/globalfeed" class="red-text"> <i class="material-icons">public</i> </a></li>
+        <li><a href="/home" class="red-text"> <i class="material-icons">home</i> </a></li>
+        <li><a href="/profile" class="red-text"> <i class="material-icons">person</i> </a></li>
+        <li><a href="/cart" class="red-text"> <i class="material-icons">shopping_cart</i> </a></li>
+        <!--<li><a href="#" class="red-text"> <i class="material-icons">notifications</i> </a></li>-->
+
+        <li><a href="" class="dropdown-button" data-activates="dropdown2">More<i class="material-icons right ">arrow_drop_down</i></a></li>
+      </ul>
+
+
+    </div>
+  </div>
+</nav>

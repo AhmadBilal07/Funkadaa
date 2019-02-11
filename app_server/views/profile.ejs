@@ -1,0 +1,484 @@
+<html>
+
+<style media="screen">
+
+   .modal
+    {
+    top:70px!important;
+    background-color: rgba(0,0,0,.10000) !important;
+    overflow: hidden!important;
+    padding: 0px!important;
+    }
+    .modal-backdrop.in
+    {
+        z-index: 9;
+   
+    }
+    #main
+    {
+    z-index: 2!important;
+    }
+    img,#test1
+    {
+    z-index: -1!important;
+    }
+
+    #section
+    {
+    z-index: 0!important;
+    }
+    i{
+        padding-left: 12px;
+
+    }
+
+.input-field label {
+        color:#f44336!important;
+    }
+
+.fixme {  text-align: center; width: 100%; }
+.bold { font-weight: bold; }
+
+body {
+    font-family: Calluna, Arial, sans-serif;
+    min-height: 1000px;
+}
+
+#header-fixed {
+    position: fixed;
+    top: 500px!important; display:none;
+    background-color:white;
+}
+.mybox
+{
+    width:24%!important;height:auto;
+    margin-top: 2%;
+    margin-right:0.5%;
+    margin-left: 0.5%;
+}
+.btn-flat
+{
+    border-radius: 20px!important;
+}
+</style>
+
+<head>
+
+    <% include partials/head %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Funkadaa</title>
+
+</head>
+
+<body>
+    <% include partials/header %>
+    <% include partials/profileheader %>
+
+
+
+
+
+               
+
+            <section id="section">
+                    <div class="container gal-container">
+    
+                            <% Myproducts.forEach( function(product,index) { %>
+                                <div class="col-md-4 col-sm-6 co-xs-12 gal-item">
+            
+            
+                                    <div class="box">
+                                        <a href="#" data-toggle="modal" data-target="#<%=index %>" onclick="ForSale('<%= product.ForSale %>','<%= product._id %>')">
+                                            <img src='<%= product.ProductDp %>'>
+                                        </a>
+                                        <div class="modal modal-fullscreen fade" id="<%=index %>" tabindex="-1" role="dialog" style="overflow:visible!important;">
+                                            <div class="modal-dialog" id="<%=index %>" role="document">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                        aria-hidden="true">×</span></button>
+            
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div> <img src='<%= product.ProductDp %>'></div>
+                                                                    <div>
+                                                                        <h4 class="description">
+                                                                            <%= product.Title %>
+                                                                        </h4>
+                                                                    </div>
+            
+                                                                </div>
+            
+                                                                <div class="col-md-6">
+                                                                    <div id="PostHeader">
+                                                                        <div class="photo">
+                                                                            <div class="avatar" style="background-image: url('<%= product.UserDp %>');  "></div>
+                                                                        </div>
+                                                                        <div class="black-text">
+                                                                            <b>
+                                                                                <%= product.UserName %></b>
+                                                                        </div>
+                                                                        <div>
+            
+                                                                        </div>
+                                                                        <div class="description-block" style="margin-top: 10px;width: 100%; width: 100%;border: 2px solid #f44336; padding: 10px;">
+                                                                            <b>Description:</b><br>
+                                                                            <%= product.Description %>
+                                                                        </div>
+                                                                        <br>
+            
+                                                                        <div id="reactio-bar" class="left " style="    margin-left: -320px;
+                                                                    display:flex!important; justify-content: flex-start!important; width: 50%;">
+                                                                            <a href="#1" role="button" onclick="like('<%= product._id %>')">
+                                                                                <i class="material-icons red-text">favorite_border</i></a>
+            
+            
+                                                                            <a href="#2" role="button" onclick="save('<%= product._id %>')">
+                                                                                <i class="material-icons red-text">bookmark_border</i></a>
+                                                                            <a href="#3" role="button" id="CartButton<%= product._id %>"
+                                                                                onclick="cart('<%= product._id %>')"> <i class="material-icons red-text">shopping_basket_border</i></a>
+            
+                                                                        </div>
+            
+                                                                    </div>
+            
+                                                                    <span style="color:#f44336;text-align: center!important;font-weight:bold;display :block;">
+                                                                        Comments</span>
+            
+            
+                                                                    <div class="comments" id="Comment<%= product._id %>" style="overflow:auto;">
+            
+                                                                        <div class="comment-wrap">
+                                                                            <div class="photo">
+                                                                                <div class="avatar" style="background-image: url('<%= User.Userdp %>')"></div>
+                                                                            </div>
+                                                                            <div class="comment-block">
+                                                                                <form method="put" class="comment">
+                                                                                    <input type="hidden" name="productid" value="<%= product._id %>"></input>
+                                                                                    <input type="text" name="comment" cols="30" id="text<%= product._id %>"
+                                                                                        rows="1" placeholder="Add comment..."
+                                                                                        required></input>
+            
+                                                                                </form>
+            
+                                                                            </div>
+            
+                                                                        </div>
+                                                                        <% product.Comments.forEach( function(com) { %>
+                                                                        <div class="comment-wrap">
+                                                                            <div class="photo">
+                                                                                <div class="avatar" style="background-image: url('<%= com.UserDp %>')"></div>
+                                                                            </div>
+                                                                            <div class="comment-block">
+                                                                                <p class="comment-text">
+                                                                                    <%= com.CommentText%>
+                                                                                </p>
+                                                                                <div class="bottom-comment">
+                                                                                    <div class="comment-date red-text bold">
+                                                                                        <%= com.UserName %>
+                                                                                    </div>
+                                                                                    <ul class="comment-actions">
+                                                                                        <li class="complain">Complain</li>
+                                                                                        <li class="reply">Reply</li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+            
+                                                                        </div>
+                                                                        <% }) %>
+            
+                                                                    </div>
+            
+                                                                </div>
+                                                            </div><br>
+                                                            <div class="row">
+            
+                                                                <div class="col-md-6 ">
+            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                                <% }) %>
+            
+                    </div>
+                </section>
+    
+
+
+
+
+
+
+
+
+
+    <div id="modal1" class="modal " style="overflow:auto;">
+        <div class="modal-content white">
+            <div>
+
+
+                <form class="col s12 " enctype="multipart/form-data" method="post" action="/profile/upload">
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input value="" id="product_title" type="text" class="validate" name="product_title" size="50"
+                                required>
+                            <label><b>Product Title<b></label>
+                        </div>
+                    </div>
+
+                    <label class="red-text">Product Image</label>
+
+                    <div class="file-field input-field">
+                        <div class="btn red">
+                            <i class="material-icons center-align" style="font-size: 20px">add_a_photo
+                                <input type="file" name="ProductDp" required>
+                            </i>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+
+                    <label class="red-text"> Product Category</label>
+                    <br>
+                    <p>
+                        <label>
+                            <input name="Category" type="radio" value="Painting" />
+                            <span class="red-text">Painting</span>
+                        </label>
+                        <label>
+                            <input name="Category" type="radio" value="Sketch" />
+                            <span class="red-text">Sketch</span>
+                        </label>
+                        <label>
+                            <input name="Category" type="radio" value="Handicraft" />
+                            <span class="red-text">Handicraft</span>
+                        </label>
+                        <label>
+                            <input name="Category" type="radio" value="Calligraphy" />
+                            <span class="red-text">Calligraphy</span>
+                        </label>
+                    </p>
+
+
+
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea" name="Description" data-length="120"></textarea>
+                            <label for="textarea1"><b>Product Description</b></label>
+                        </div>
+                    </div>
+                    <label><b>For Sale</b></label>
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" id="checkbox" name="ForSale">
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input value="" id="quantity" name="Quantity" type="text" class="saleoption" style="color: #000!important;"
+                                size="50" disabled="disabled" required>
+                            <label><b>Product Quantity<b></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input value="" id="price" name="Price" type="text" style="color: #000!important;" type="text"
+                                class=" saleoption validate" name="product_quantity" size="50" disabled="disabled"
+                                required>
+                            <label><b>Product Price<b></label>
+                        </div>
+                    </div>
+                </form>
+                <input type="submit" class="btn red right" name="insert_product" value="Insert">
+                <br>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+         //   $('select').formSelect();
+        });
+
+        $(document).ready(function () {
+
+            $('ul.tabs').tabs({
+                //        swipeable: true,
+                responsiveThreshold: 1920,
+            });
+
+        });
+
+        $(document).ready(function () {
+            // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
+            $('.modal').modal();
+            $('.modal-trigger').leanModal();
+
+            //document.querySelector('.tabs-content.carousel').style.height = window.innerHeight + "px";
+        });
+        $(document).ready(function () {
+            $(".btn-pref .btn").click(function () {
+                $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+                // $(".tab").addClass("active"); // instead of this do the below 
+                $(this).removeClass("btn-default").addClass("btn-primary");
+            });
+        });
+        $('select').material_select();
+        var fixmeTop = $('.fixme').offset().top;
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= fixmeTop - 270) {
+                $('.fixme').css({
+                    position: 'fixed',
+                    top: '70px',
+                    left: '0',
+
+                });
+            } else {
+                $('.fixme').css({
+                    position: 'static',
+
+                });
+            }
+        });
+
+        $('#checkbox').click(function () {
+            $(".saleoption").toggleClass("bold");
+            if ($(this).is(':checked')) {
+                $('#price').removeAttr('disabled');
+                $('#quantity').removeAttr('disabled');
+
+            } else {
+                $('#price').attr('disabled', 'disabled');
+                $('#quantity').attr('disabled', 'disabled');
+
+            }
+
+        });
+
+    $('ul.tabs .tab').each(function checkActive(item) {
+        var $a = $(this).find('a');
+        if (location.pathname === $a.attr('href')) {
+            $('.tabs .active').removeClass("active");
+            $a.addClass("active");
+        }
+    });
+    
+
+$(".comment").on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+
+            url: '/comment',
+            type: 'PUT',
+            data: $(this).serialize(),
+            success: function (response) {
+                $("#text" + response.Productid).val('');
+                $("#Comment" + response.Productid).append(
+                    "     <div class='comment-wrap'><div class='photo'><div class='avatar' style='background-image: url(" +
+                    response.UserDp +
+                    ")'></div></div><div class='comment-block'><p class='comment-text'>" +
+                    response.Comment +
+                    "</p><div class='bottom-comment'><div class='comment-date'>" + response.UserName +
+                    "</div><ul class='comment-actions'><li class='complain'>Complain</li><li class='reply'>Reply</li></ul></div></div></div>"
+                );
+
+            }
+
+        });
+
+
+    });
+
+
+    function ForSale(s, id) {
+
+        if (s == "false") {
+            $('#CartButton' + id).hide();
+        }
+    }
+
+    function like(item) {
+
+        $.ajax({
+
+            url: '/like/' + item,
+            type: 'PUT',
+            success: function () {
+
+            }
+
+        });
+        event.preventDefault();
+    }
+
+
+    function save(item) {
+
+        $.ajax({
+
+            url: '/bookmark/' + item,
+            type: 'PUT',
+            success: function () {
+
+            }
+
+        });
+        event.preventDefault();
+    }
+
+
+    function cart(item) {
+
+        $.ajax({
+
+            url: '/AddToCart/' + item,
+            type: 'PUT',
+            success: function () {
+
+            }
+
+        });
+        event.preventDefault();
+    }
+
+
+</script>
+
+</body>
+
+</html>
