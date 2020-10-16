@@ -1,8 +1,5 @@
 ## Funkadaa
 
-Project Group Members
-
-
 
 About Funkadaa :
 			
