@@ -2,7 +2,6 @@
 
 Project Group Members
 
- Ahmad Bilal
 
 
 About Funkadaa :
